@@ -1,3 +1,5 @@
+import { CacheCandidateCacheAdapter } from '@jointly/cache-candidate';
+
 const makeDependencyManager = () => {
   const instances = new Map();
   return {
@@ -8,7 +10,7 @@ const makeDependencyManager = () => {
     }: {
       key: unknown;
       dependencyKeys: Array<string>;
-      cacheAdapter: any;
+      cacheAdapter: CacheCandidateCacheAdapter;
     }) => {
       for (const dependencyKey of dependencyKeys) {
         if (!instances.has(dependencyKey)) {

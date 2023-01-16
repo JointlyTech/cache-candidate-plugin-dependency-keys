@@ -1,4 +1,7 @@
-import { CacheCandidatePlugin, Hooks } from '@jointly/cache-candidate-plugin-base';
+import {
+  CacheCandidatePlugin,
+  Hooks
+} from '@jointly/cache-candidate-plugin-base';
 import { cacheCandidateDependencyManager } from './manager';
 
 export const PluginDependencyKeys: CacheCandidatePlugin = {
