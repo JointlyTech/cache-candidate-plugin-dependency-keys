@@ -1,5 +1,2 @@
-import { HelloWorld } from './hello-world';
-
-export const sayHello = () => {
-  return HelloWorld;
-};
+export * from './manager';
+export * from './plugin';
