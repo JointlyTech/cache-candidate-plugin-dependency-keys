@@ -2,6 +2,25 @@
 
 ##### Chores
 
+*  updated deps ([9b5d39fa](https://github.com/JointlyTech/cache-candidate-plugin-dependency-keys/commit/9b5d39fac3067c281b80e08a61974fbd94c44c58))
+*  better manager typings ([a44c020a](https://github.com/JointlyTech/cache-candidate-plugin-dependency-keys/commit/a44c020a606725711eb0a60c6ffb0ec63b51df1b))
+*  removed unnecessary file ([dee0a041](https://github.com/JointlyTech/cache-candidate-plugin-dependency-keys/commit/dee0a041582574bab537e32cf09414e69ded54da))
+* **deps:**  bump json5 from 2.2.1 to 2.2.3 ([72ed547b](https://github.com/JointlyTech/cache-candidate-plugin-dependency-keys/commit/72ed547bf9a8d0f9333ac928af5d17529f40b6d9))
+
+##### Documentation Changes
+
+*  updated changelog ([739c0580](https://github.com/JointlyTech/cache-candidate-plugin-dependency-keys/commit/739c058079747cf2921e19420ea4d5ba2ebdb561))
+*  aligned documentation with current release ([fca51f3f](https://github.com/JointlyTech/cache-candidate-plugin-dependency-keys/commit/fca51f3f1e38a6a548c970d4a1920681199d5f7e))
+*  started working on new docs ([6802d26c](https://github.com/JointlyTech/cache-candidate-plugin-dependency-keys/commit/6802d26cfd23d04962fd5bded04051e71c830a5f))
+
+##### Tests
+
+*  improved coverage ([993ab789](https://github.com/JointlyTech/cache-candidate-plugin-dependency-keys/commit/993ab78921e00658933957e14d757a3c2d019c01))
+
+#### 1.0.2 (2023-01-17)
+
+##### Chores
+
 *  better manager typings ([a44c020a](https://github.com/JointlyTech/cache-candidate-plugin-dependency-keys/commit/a44c020a606725711eb0a60c6ffb0ec63b51df1b))
 *  removed unnecessary file ([dee0a041](https://github.com/JointlyTech/cache-candidate-plugin-dependency-keys/commit/dee0a041582574bab537e32cf09414e69ded54da))
 
