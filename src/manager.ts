@@ -1,14 +1,17 @@
 import { CacheCandidateCacheAdapter } from '@jointly/cache-candidate';
 
 const makeDependencyManager = () => {
-  const instances = new Map();
+  const instances: Map<
+    string,
+    Array<{ key: string; cacheAdapter: CacheCandidateCacheAdapter }>
+  > = new Map();
   return {
     register: ({
       key,
       dependencyKeys,
       cacheAdapter
     }: {
-      key: unknown;
+      key: string;
       dependencyKeys: Array<string>;
       cacheAdapter: CacheCandidateCacheAdapter;
     }) => {
@@ -21,7 +24,7 @@ const makeDependencyManager = () => {
             }
           ]);
         } else {
-          instances.get(dependencyKey).push({
+          instances.get(dependencyKey)!.push({
             key,
             cacheAdapter
           });
@@ -37,7 +40,7 @@ const makeDependencyManager = () => {
         return;
       }
 
-      instances.get(dependencyKey).forEach(({ key, cacheAdapter }) => {
+      instances.get(dependencyKey)!.forEach(({ key, cacheAdapter }) => {
         cacheAdapter.delete(key);
       });
     },
