@@ -25,7 +25,7 @@ async function getUsers() {
 
 async function updateUser(user) {
   // Do something
-  cacheCandidateDependencyManager.invalidate(`users-${user.id}`);
+  cacheCandidateDependencyManager.invalidate(`users-${user.id}`); // <-- This is responsible for invalidating the cache records that depend on the key 'users-1'
   return user;
 }
 
@@ -44,7 +44,7 @@ const cachedGetUsers = cacheCandidate(getUsers, {
 let users;
 users = await cachedGetUsers(); // <-- This will be executed and cached
 users = await cachedGetUsers(); // <-- This will be retrieved from the cache
-await updateUser({ id: 1, name: 'John' });
+await updateUser({ id: 1, name: 'John' }); // <-- This will invalidate the dependency key 'users-1' and the cache record will be removed consequently
 users = await cachedGetUsers(); // <-- This will be executed and cached
 ```
 
