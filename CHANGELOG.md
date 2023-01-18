@@ -1,3 +1,13 @@
+#### 1.0.3 (2023-01-18)
+
+##### Chores
+
+*  linting ([36c26119](https://github.com/JointlyTech/cache-candidate-plugin-dependency-keys/commit/36c26119cf2e0f6b6eee1b1db12971808051b654))
+
+##### Documentation Changes
+
+*  invalidation explained better ([11c10d94](https://github.com/JointlyTech/cache-candidate-plugin-dependency-keys/commit/11c10d9451ffd773147c3de1dfb42f4faac45c15))
+
 #### 1.0.2 (2023-01-17)
 
 ##### Chores
