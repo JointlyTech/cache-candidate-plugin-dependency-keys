@@ -1,37 +1,24 @@
-import { CacheCandidateCacheAdapter } from '@jointly/cache-candidate';
+import { PluginPayload } from '@jointly/cache-candidate-plugin-base';
 
 const makeDependencyManager = () => {
-  const instances: Map<
-    string,
-    Array<{ key: string; cacheAdapter: CacheCandidateCacheAdapter }>
-  > = new Map();
+  const instances: Map<string, Array<PluginPayload>> = new Map();
   return {
-    register: ({
-      key,
-      dependencyKeys,
-      cacheAdapter
-    }: {
-      key: string;
-      dependencyKeys: Array<string>;
-      cacheAdapter: CacheCandidateCacheAdapter;
-    }) => {
+    register: (payload: PluginPayload, dependencyKeys: string[]) => {
       for (const dependencyKey of dependencyKeys) {
         if (!instances.has(dependencyKey)) {
-          instances.set(dependencyKey, [
-            {
-              key,
-              cacheAdapter
-            }
-          ]);
+          instances.set(dependencyKey, [payload]);
         } else {
-          instances.get(dependencyKey)!.push({
-            key,
-            cacheAdapter
-          });
+          // Check if payload.key doesn't exist already, if so throw
+          for(const _payload of instances.get(dependencyKey) ?? []) {
+            if(_payload.key === payload.key) {
+              throw new Error(`Key ${payload.key} already exists in dependency manager. Please, check your cache-candidate configuration to prevent multiple dependency registrations for the same key.`);
+            }
+          }
+          instances.get(dependencyKey)?.push(payload);
         }
       }
     },
-    invalidate: (dependencyKey: string | number) => {
+    invalidate: async (dependencyKey: string | number) => {
       if (typeof dependencyKey === 'number') {
         dependencyKey = dependencyKey.toString();
       }
@@ -40,19 +27,25 @@ const makeDependencyManager = () => {
         return;
       }
 
-      instances.get(dependencyKey)!.forEach(({ key, cacheAdapter }) => {
-        cacheAdapter.delete(key);
-      });
+      for (const payload of instances.get(dependencyKey) ?? []) {
+        await payload.internals?.deleteDataCacheRecord({
+          options: payload.options,
+          key: payload.key,
+          HookPayload: payload
+        });
+      }
+
+      return;
     },
     deleteKey: (dataCacheRecordKey: string) => {
-      for (const [dependencyKey, keys] of instances.entries()) {
-        if (keys.some((_key) => _key.key === dataCacheRecordKey)) {
-          if (keys.length === 1) {
+      for (const [dependencyKey, payloadList] of instances.entries()) {
+        if (payloadList.some((_key) => _key.key === dataCacheRecordKey)) {
+          if (payloadList.length === 1) {
             instances.delete(dependencyKey);
           } else {
             instances.set(
               dependencyKey,
-              keys.filter((_key) => _key.key !== dataCacheRecordKey)
+              payloadList.filter((_key) => _key.key !== dataCacheRecordKey)
             );
           }
         }

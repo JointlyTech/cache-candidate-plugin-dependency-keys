@@ -15,15 +15,17 @@ export const PluginDependencyKeys: CacheCandidatePlugin = {
     },
     {
       hook: Hooks.DATACACHE_RECORD_ADD_POST,
-      action: async ({ options, key, result }, additionalParameters) => {
+      action: async (payload, additionalParameters) => {
         if (!additionalParameters.dependencyKeys) return;
         let dependencyKeys: any = additionalParameters.dependencyKeys;
-        dependencyKeys = await remapDependencyKeys(dependencyKeys, result);
-        cacheCandidateDependencyManager.register({
+        dependencyKeys = await remapDependencyKeys(dependencyKeys, payload.result);
+        cacheCandidateDependencyManager.register(
+          payload, dependencyKeys
+        /*{
           key,
           dependencyKeys,
           cacheAdapter: options.cache
-        });
+        }*/);
       }
     }
   ]

@@ -51,8 +51,8 @@ describe('CacheCandidatePlugin - CacheCandidate', () => {
     mock.mockFunction(step);
     await sleep(EXECUTION_MARGIN);
     expect(cacheCandidateDependencyManager.instances.size).toBe(2);
-    cacheCandidateDependencyManager.invalidate('a');
-    expect(cacheCandidateDependencyManager.instances.size).toBe(2);
+    await cacheCandidateDependencyManager.invalidate('a');
+    expect(cacheCandidateDependencyManager.instances.size).toBe(0);
   });
 
   it('should delete a record if deleteKey is called directly', async () => {
@@ -115,24 +115,23 @@ describe('CacheCandidatePlugin - CacheCandidate', () => {
       ttl: 800,
       ...pluginsOptions()
     });
-    let result: unknown;
-    result = await wrappedMockFn(1);
+    await wrappedMockFn(1);
     await sleep(EXECUTION_MARGIN);
-    expect(result).toBe(1);
-    result = await wrappedMockFn(1);
+    expect(counter).toBe(1);
+    await wrappedMockFn(1);
     await sleep(EXECUTION_MARGIN);
-    expect(result).toBe(1);
-    result = await wrappedMockFn(1);
+    expect(counter).toBe(1);
+    await wrappedMockFn(1);
     await sleep(EXECUTION_MARGIN);
     expect(cacheCandidateDependencyManager.instances.size).toBe(1);
     await sleep(EXECUTION_MARGIN);
-    expect(result).toBe(1);
+    expect(counter).toBe(1);
     cacheCandidateDependencyManager.invalidate(0);
     await sleep(EXECUTION_MARGIN);
     expect(cacheCandidateDependencyManager.instances.size).toBe(1);
     cacheCandidateDependencyManager.invalidate(1);
     await sleep(EXECUTION_MARGIN);
-    expect(cacheCandidateDependencyManager.instances.size).toBe(1);
+    expect(cacheCandidateDependencyManager.instances.size).toBe(0);
     await sleep(EXECUTION_MARGIN);
   });
 });
