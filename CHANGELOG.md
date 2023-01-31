@@ -1,3 +1,18 @@
+#### 1.0.4 (2023-01-31)
+
+##### Chores
+
+*  forcing cache-candidate and plugin-base min version to accomodate internals ([53f6ec58](https://github.com/JointlyTech/cache-candidate-plugin-dependency-keys/commit/53f6ec589c44d9236cd9570df3c75a638b870443))
+*  updating deps ([fcd82ed1](https://github.com/JointlyTech/cache-candidate-plugin-dependency-keys/commit/fcd82ed1ec85c7fa3ec1816ad542eaf0d0792912))
+
+##### Documentation Changes
+
+*  updated additional parameter allowed input ([e7d79856](https://github.com/JointlyTech/cache-candidate-plugin-dependency-keys/commit/e7d79856dae9bd5e950d849d616fc6a3f1391610))
+
+##### Refactors
+
+*  moving to internals system ([3f10b224](https://github.com/JointlyTech/cache-candidate-plugin-dependency-keys/commit/3f10b224dd595084df4a506d58360c4641d87827))
+
 #### 1.0.3 (2023-01-18)
 
 ##### Chores
