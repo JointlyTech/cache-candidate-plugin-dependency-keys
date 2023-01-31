@@ -18,14 +18,19 @@ export const PluginDependencyKeys: CacheCandidatePlugin = {
       action: async (payload, additionalParameters) => {
         if (!additionalParameters.dependencyKeys) return;
         let dependencyKeys: any = additionalParameters.dependencyKeys;
-        dependencyKeys = await remapDependencyKeys(dependencyKeys, payload.result);
+        dependencyKeys = await remapDependencyKeys(
+          dependencyKeys,
+          payload.result
+        );
         cacheCandidateDependencyManager.register(
-          payload, dependencyKeys
-        /*{
+          payload,
+          dependencyKeys
+          /*{
           key,
           dependencyKeys,
           cacheAdapter: options.cache
-        }*/);
+        }*/
+        );
       }
     }
   ]

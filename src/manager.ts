@@ -9,9 +9,11 @@ const makeDependencyManager = () => {
           instances.set(dependencyKey, [payload]);
         } else {
           // Check if payload.key doesn't exist already, if so throw
-          for(const _payload of instances.get(dependencyKey) ?? []) {
-            if(_payload.key === payload.key) {
-              throw new Error(`Key ${payload.key} already exists in dependency manager. Please, check your cache-candidate configuration to prevent multiple dependency registrations for the same key.`);
+          for (const _payload of instances.get(dependencyKey) ?? []) {
+            if (_payload.key === payload.key) {
+              throw new Error(
+                `Key ${payload.key} already exists in dependency manager. Please, check your cache-candidate configuration to prevent multiple dependency registrations for the same key.`
+              );
             }
           }
           instances.get(dependencyKey)?.push(payload);
