@@ -1,3 +1,13 @@
+### 1.1.0 (2024-12-03)
+
+##### Chores
+
+*  linting ([93b3aedf](https://github.com/JointlyTech/cache-candidate-plugin-dependency-keys/commit/93b3aedf86c62baaae8d58b07f207ab440ab3113))
+
+##### New Features
+
+*  manager now ignores duplicated values as payload instead of throwing error ([6daecb9a](https://github.com/JointlyTech/cache-candidate-plugin-dependency-keys/commit/6daecb9a812e863a56cca19f1c815ea108ab1ed3))
+
 #### 1.0.4 (2023-01-31)
 
 ##### Chores
