@@ -1,3 +1,9 @@
+## 3.0.0 (2025-02-24)
+
+##### Chores
+
+*  linting ([56da4cda](https://github.com/JointlyTech/cache-candidate-plugin-dependency-keys/commit/56da4cda357b463e41e4a6999dbfe424e4803596))
+
 ### 1.1.0 (2024-12-03)
 
 ##### Chores
