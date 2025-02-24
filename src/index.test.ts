@@ -1,7 +1,7 @@
 import { cacheCandidate } from '@jointly/cache-candidate';
 import { cacheCandidateDependencyManager } from './manager';
-import { MockClass } from './test/MockClass3';
-import { MockClass as MockClass2 } from './test/MockClass4';
+import { mockFunction as mockFunctionFirst, mockAsyncFunction as mockAsyncFunctionFirst } from './test/MockClass3';
+import { mockFunction as mockFunctionSecond, mockAsyncFunction as mockAsyncFunctionSecond } from './test/MockClass4';
 
 import {
   step,
@@ -22,33 +22,30 @@ beforeEach(async () => {
 describe('CacheCandidatePlugin - CacheCandidate', () => {
   it('should expose manager', async () => {
     const step = stepper();
-    new MockClass2(step, step, step, step);
+    mockFunctionFirst(0);
     expect(cacheCandidateDependencyManager).toBeDefined();
   });
 
   it('should fill manager map if dependencyKeys is defined as array', async () => {
     const step = stepper();
-    const mock = new MockClass(step, step, step, step);
-    mock.mockFunction(step);
+    mockFunctionFirst(step);
     await sleep(EXECUTION_MARGIN);
     expect(cacheCandidateDependencyManager.instances.size).toBe(2);
-    mock.mockAsyncFunction(step);
+    mockAsyncFunctionFirst(step);
     await sleep(EXECUTION_MARGIN);
     expect(cacheCandidateDependencyManager.instances.size).toBe(2);
   });
 
   it('should fill manager map if dependencyKeys is defined as function', async () => {
     const step = stepper();
-    const mock = new MockClass2(step, step, step, step);
-    await mock.mockAsyncFunction(step);
+    await mockAsyncFunctionSecond(step);
     await sleep(EXECUTION_MARGIN);
     expect(cacheCandidateDependencyManager.instances.size).toBe(3);
   });
 
   it('should delete a record if invalidated', async () => {
     const step = stepper();
-    const mock = new MockClass(step, step, step, step);
-    mock.mockFunction(step);
+    mockFunctionFirst(step);
     await sleep(EXECUTION_MARGIN);
     expect(cacheCandidateDependencyManager.instances.size).toBe(2);
     await cacheCandidateDependencyManager.invalidate('a');

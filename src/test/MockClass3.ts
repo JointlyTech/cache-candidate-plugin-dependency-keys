@@ -1,21 +1,10 @@
-import { CacheCandidate } from '@jointly/cache-candidate';
+import { cacheCandidate } from '@jointly/cache-candidate';
 import { options, pluginsOptions } from './options';
 
-export class MockClass {
-  constructor(
-    public a: number,
-    public b: number,
-    public aAsync: number,
-    public bAsync: number
-  ) {}
+export const mockAsyncFunction = cacheCandidate(async (step: number) => {
+  return step;
+}, { ...options, ...pluginsOptions(['a', 'b']) });
 
-  @CacheCandidate({ ...options, ...pluginsOptions(['a', 'b']) })
-  async mockAsyncFunction(step: number) {
-    return step;
-  }
-
-  @CacheCandidate({ ...options, ...pluginsOptions(['a', 'b']) })
-  mockFunction(step: number) {
-    return step;
-  }
-}
+export const mockFunction = cacheCandidate((step: number) => {
+  return step;
+}, { ...options, ...pluginsOptions(['a', 'b']) });
