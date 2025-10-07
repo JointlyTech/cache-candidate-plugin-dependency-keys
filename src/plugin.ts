@@ -20,7 +20,8 @@ export const PluginDependencyKeys: CacheCandidatePlugin = {
         let dependencyKeys: any = additionalParameters.dependencyKeys;
         dependencyKeys = await remapDependencyKeys(
           dependencyKeys,
-          payload.result
+          payload.result,
+          payload.fnArgs
         );
         cacheCandidateDependencyManager.register(
           payload,
@@ -36,9 +37,9 @@ export const PluginDependencyKeys: CacheCandidatePlugin = {
   ]
 };
 
-async function remapDependencyKeys(dependencyKeys: any, result: unknown) {
+async function remapDependencyKeys(dependencyKeys: any, result: unknown, fnArgs: unknown[]) {
   if (typeof dependencyKeys === 'function') {
-    dependencyKeys = dependencyKeys(result);
+    dependencyKeys = dependencyKeys(result, fnArgs);
     if (dependencyKeys instanceof Promise) {
       dependencyKeys = await dependencyKeys;
     }

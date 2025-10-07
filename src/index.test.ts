@@ -152,4 +152,36 @@ test('CacheCandidatePlugin - CacheCandidate', async (t) => {
       await sleep(EXECUTION_MARGIN);
     }
   );
+
+  await t.test(
+    'should correctly pass fnArgs to the dependencyKeys function',
+    async () => {
+      const step = stepper();
+      let capturedFnArgs: any = null;
+      let capturedResult: any = null;
+      
+      const mockFn = (arg1: string, arg2: number, arg3: boolean) =>
+        new Promise((resolve) => {
+          resolve({ arg1, arg2, arg3 });
+        });
+      
+      const wrappedMockFn = cacheCandidate(mockFn, {
+        requestsThreshold: 1,
+        ttl: 800,
+        ...pluginsOptions((result: any, fnArgs: any[]) => {
+          capturedResult = result;
+          capturedFnArgs = fnArgs;
+          return ['test-key'];
+        })
+      });
+      
+      await wrappedMockFn('hello', 42, true);
+      await sleep(EXECUTION_MARGIN);
+      
+      assert.deepEqual(capturedFnArgs, ['hello', 42, true]);
+      assert.deepEqual(capturedResult, { arg1: 'hello', arg2: 42, arg3: true });
+      assert.equal(cacheCandidateDependencyManager.instances.size, 1);
+      assert.ok(cacheCandidateDependencyManager.instances.has('test-key'));
+    }
+  );
 });
