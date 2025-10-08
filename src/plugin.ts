@@ -8,6 +8,16 @@ export const PluginDependencyKeys: CacheCandidatePlugin = {
   name: 'dependencyKeys',
   hooks: [
     {
+      hook: Hooks.INIT,
+      action: async (payload, additionalParameters) => {
+        if (payload.options.fetchingMode === 'stale-while-revalidate') {
+          console.warn(
+            'We currently do not support stale-while-revalidate in cache-candidate-plugin-dependency-keys'
+          );
+        }
+      }
+    },
+    {
       hook: Hooks.DATACACHE_RECORD_DELETE_POST,
       action: async ({ key }) => {
         cacheCandidateDependencyManager.deleteKey(key);
@@ -37,7 +47,11 @@ export const PluginDependencyKeys: CacheCandidatePlugin = {
   ]
 };
 
-async function remapDependencyKeys(dependencyKeys: any, result: unknown, fnArgs: unknown[]) {
+async function remapDependencyKeys(
+  dependencyKeys: any,
+  result: unknown,
+  fnArgs: unknown[]
+) {
   if (typeof dependencyKeys === 'function') {
     dependencyKeys = dependencyKeys(result, fnArgs);
     if (dependencyKeys instanceof Promise) {

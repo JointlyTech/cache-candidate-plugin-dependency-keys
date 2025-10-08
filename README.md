@@ -53,3 +53,7 @@ This property can be either a number, a string, an array of strings, a function 
 Both the function and the Promise will receive the result of the method on which the `cacheCandidate` operates as the first argument and the function arguments as the second argument (`fnArgs`).   
 In case of an async method, the promise will be fulfilled before passing the result to the `dependencyKeys` function.  
 The `dependencyKeys` function will be called only if the cache adapter correctly sets the value in the cache (i.e. the `.set` method is fulfilled).
+
+## Gotchas
+
+If you configured cache-candidate in `stale-while-revalidate` mode, this plugin won't work as currently we do not support such feature as this would conflict with the behaviour of this plugin.

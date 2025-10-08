@@ -34,7 +34,10 @@ const makeDependencyManager = () => {
         await payload.internals?.deleteDataCacheRecord({
           options: payload.options,
           key: payload.key,
-          HookPayload: payload
+          HookPayload: payload,
+          result: null, // Currently, stale-while-revalidate is not supported.
+          staleMap: new Map(), // Currently, stale-while-revalidate is not supported.
+          forceDeleteFn: true
         });
       }
 

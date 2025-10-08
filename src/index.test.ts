@@ -159,12 +159,12 @@ test('CacheCandidatePlugin - CacheCandidate', async (t) => {
       const step = stepper();
       let capturedFnArgs: any = null;
       let capturedResult: any = null;
-      
+
       const mockFn = (arg1: string, arg2: number, arg3: boolean) =>
         new Promise((resolve) => {
           resolve({ arg1, arg2, arg3 });
         });
-      
+
       const wrappedMockFn = cacheCandidate(mockFn, {
         requestsThreshold: 1,
         ttl: 800,
@@ -174,10 +174,10 @@ test('CacheCandidatePlugin - CacheCandidate', async (t) => {
           return ['test-key'];
         })
       });
-      
+
       await wrappedMockFn('hello', 42, true);
       await sleep(EXECUTION_MARGIN);
-      
+
       assert.deepEqual(capturedFnArgs, ['hello', 42, true]);
       assert.deepEqual(capturedResult, { arg1: 'hello', arg2: 42, arg3: true });
       assert.equal(cacheCandidateDependencyManager.instances.size, 1);
