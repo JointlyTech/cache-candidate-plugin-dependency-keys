@@ -1,3 +1,10 @@
+### 3.1.0 (2025-10-08)
+
+##### New Features
+
+*  updating dependencies to allow for forceDeleteFn ([bf64b5fe](https://github.com/JointlyTech/cache-candidate-plugin-dependency-keys/commit/bf64b5fe101b34d80685c2b463c452fb7009d184))
+*  enhance dependencyKeys handling to include function arguments ([#6](https://github.com/JointlyTech/cache-candidate-plugin-dependency-keys/pull/6)) ([da37f507](https://github.com/JointlyTech/cache-candidate-plugin-dependency-keys/commit/da37f5076516911e37940e4a881bd06204583bab))
+
 ## 3.0.0 (2025-02-24)
 
 ##### Chores
