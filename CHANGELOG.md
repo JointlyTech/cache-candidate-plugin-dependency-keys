@@ -1,3 +1,9 @@
+#### 3.1.1 (2025-10-08)
+
+##### Chores
+
+*  removing non working eslint ([ee8b729a](https://github.com/JointlyTech/cache-candidate-plugin-dependency-keys/commit/ee8b729a847a7aaca59d793cb3e6f3b3e5fb4dcf))
+
 ### 3.1.0 (2025-10-08)
 
 ##### New Features
